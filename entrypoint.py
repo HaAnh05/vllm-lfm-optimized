@@ -14,6 +14,9 @@ os.environ["VLLM_LOGGING_LEVEL"] = "WARNING"
 # Disable tokenizer parallelism (tránh thread contention trên 3 CPU cores)
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+# Force aggressive torch.compile optimization
+os.environ["VLLM_TORCH_COMPILE_LEVEL"] = "3"
+
 # Launch vLLM server with all arguments passed through
 cmd = [sys.executable, "-m", "vllm.entrypoints.openai.api_server"] + sys.argv[1:]
 os.execvp(sys.executable, cmd)
