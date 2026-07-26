@@ -9,8 +9,8 @@ services:
       - --served-model-name=LFM2.5-1.2B-Instruct #Don't change this to vllm-server
       - --host=0.0.0.0 #Don't change this to vllm-server
       - --port=8000 #Don't change this to vllm-server
-      - --max-model-len=8192
-      - --max-num-seqs=75
+      - --max-model-len=4096
+      - --max-num-seqs=50
       - --gpu-memory-utilization=0.96
       - --tensor-parallel-size=1
       - --enable-prefix-caching
@@ -19,8 +19,6 @@ services:
       - --enable-chunked-prefill
       - --max-num-batched-tokens=2048
       - --gdn-prefill-backend=cutedsl
-      - --linear-backend=machete
-      - --performance-mode=interactivity
       - --optimization-level=3
       - --no-enable-log-requests
       - --disable-log-stats
