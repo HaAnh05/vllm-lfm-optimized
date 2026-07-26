@@ -17,10 +17,8 @@ services:
       - --kv-cache-dtype=fp8
       - --quantization=fp8
       - --enable-chunked-prefill
-      - --max-num-batched-tokens=2048
+      - --max-num-batched-tokens=4096
       - --gdn-prefill-backend=cutedsl
-      - --linear-backend=machete
-      - --performance-mode=interactivity
       - --optimization-level=3
       - --no-enable-log-requests
       - --disable-log-stats

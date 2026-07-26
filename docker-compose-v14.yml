@@ -19,7 +19,6 @@ services:
       - --enable-chunked-prefill
       - --max-num-batched-tokens=2048
       - --gdn-prefill-backend=cutedsl
-      - --linear-backend=machete
       - --performance-mode=interactivity
       - --optimization-level=3
       - --no-enable-log-requests

@@ -44,7 +44,7 @@ Applying **Online FP8 Weight Quantization** (`--quantization=fp8`) reduces memor
 | **V10** | **48.59** | 52 | 89 | 6 | 8 | Reverted speculative decoding; evaluated `machete` backend and throughput scheduling. |
 | **V11** | **59.62** | **49** | **81** | **4** | **7** | **Major Breakthrough:** Deployed custom container with online FP8 weight quantization. |
 | **V12** | **60.40** | 50 | **73** | **4** | **4** | Set `VLLM_TORCH_COMPILE_LEVEL=3`, `--gpu-memory-utilization=0.95`, `--max-num-batched-tokens=4096`. Reduced p95 latency to 73ms and failures to 4. |
-| **V13 (Ultimate Combined)** | *Ready* | — | — | — | — | Combined FP8 Quantization + `--gpu-memory-utilization=0.96` + `--max-num-seqs=75` + Micro Speculation (`ngram_gpu`, `--spec-tokens=2`) + Level 3 optimization + CPU Thread bounds (`=3`). |
+| **V15 (Hiện tại - Ultimate)** | *Ready* | — | — | — | — | Ultimate Hopper-native profile: `--linear-backend=machete` + `--performance-mode=interactivity` + `--max-num-batched-tokens=2048` + FP8 Quantization + `--gpu-memory-utilization=0.96` + `--max-num-seqs=75`. |
 
 ---
 
