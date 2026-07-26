@@ -43,7 +43,8 @@ Applying **Online FP8 Weight Quantization** (`--quantization=fp8`) reduces memor
 | **V8–V9** | **0.00** | — | — | — | — | Speculative decoding (`ngram_gpu`) triggered hidden state corruption on GDN rollbacks. |
 | **V10** | **48.59** | 52 | 89 | 6 | 8 | Reverted speculative decoding; evaluated `machete` backend and throughput scheduling. |
 | **V11** | **59.62** | **49** | **81** | **4** | **7** | **Major Breakthrough:** Deployed custom container with online FP8 weight quantization. |
-| **V12** | *Pending* | — | — | — | — | Set `VLLM_TORCH_COMPILE_LEVEL=3`, `--gpu-memory-utilization=0.95`, and `--max-num-batched-tokens=4096`. |
+| **V12** | **60.40** | 50 | **73** | **4** | **4** | Set `VLLM_TORCH_COMPILE_LEVEL=3`, `--gpu-memory-utilization=0.95`, `--max-num-batched-tokens=4096`. Reduced p95 latency to 73ms and failures to 4. |
+| **V13 (Hiện tại)** | *Ready* | — | — | — | — | Fine-tuned `--gpu-memory-utilization=0.96` (target 0 failures), `--max-num-seqs=75` (caps concurrency for 70 convs), `--swap-space=1`, OMP/MKL CPU thread caps (`=3`). |
 
 ---
 
@@ -54,7 +55,7 @@ Images are built via GitHub Actions using the `.github/workflows/build-docker.ym
 
 ```bash
 git add .
-git commit -m "Deploy V12 optimization profile"
+git commit -m "Deploy V13 optimization profile"
 git push origin main
 ```
 
@@ -63,7 +64,7 @@ git push origin main
 ```yaml
 services:
   model:
-    image: haanh05/vllm-lfm-optimized:v2
+    image: haanh05/vllm-lfm-optimized:v3
     entrypoint: ["python3", "/app/entrypoint.py"]
     command:
       - --model=/model
@@ -71,6 +72,8 @@ services:
       - --host=0.0.0.0
       - --port=8000
       - --max-model-len=8192
+      - --max-num-seqs=80
+      - --swap-space=1
       - --gpu-memory-utilization=0.95
       - --tensor-parallel-size=1
       - --enable-prefix-caching

@@ -1,6 +1,6 @@
 services:
   model:
-    image: haanh05/vllm-lfm-optimized:v2
+    image: haanh05/vllm-lfm-optimized:v3
     entrypoint:
       - python3 #Don't change this to vllm-server
       - /app/entrypoint.py #Don't change this to vllm-server
@@ -10,7 +10,9 @@ services:
       - --host=0.0.0.0 #Don't change this to vllm-server
       - --port=8000 #Don't change this to vllm-server
       - --max-model-len=8192
-      - --gpu-memory-utilization=0.95
+      - --max-num-seqs=75
+      - --swap-space=1
+      - --gpu-memory-utilization=0.96
       - --tensor-parallel-size=1
       - --enable-prefix-caching
       - --kv-cache-dtype=fp8

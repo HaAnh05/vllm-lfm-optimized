@@ -27,6 +27,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/vllm-lfm-optimized:v2
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/vllm-lfm-optimized:v3
           cache-from: type=gha
           cache-to: type=gha,mode=max
