@@ -44,7 +44,7 @@ Applying **Online FP8 Weight Quantization** (`--quantization=fp8`) reduces memor
 | **V10** | **48.59** | 52 | 89 | 6 | 8 | Reverted speculative decoding; evaluated `machete` backend and throughput scheduling. |
 | **V11** | **59.62** | **49** | **81** | **4** | **7** | **Major Breakthrough:** Deployed custom container with online FP8 weight quantization. |
 | **V12** | **60.40** | 50 | **73** | **4** | **4** | Set `VLLM_TORCH_COMPILE_LEVEL=3`, `--gpu-memory-utilization=0.95`, `--max-num-batched-tokens=4096`. Reduced p95 latency to 73ms and failures to 4. |
-| **V13 (Hiện tại)** | *Ready* | — | — | — | — | Fine-tuned `--gpu-memory-utilization=0.96` (target 0 failures), `--max-num-seqs=75` (caps concurrency for 70 convs), `--swap-space=1`, OMP/MKL CPU thread caps (`=3`). |
+| **V13 (Ultimate Combined)** | *Ready* | — | — | — | — | Combined FP8 Quantization + `--gpu-memory-utilization=0.96` + `--max-num-seqs=75` + Micro Speculation (`ngram_gpu`, `--spec-tokens=2`) + Level 3 optimization + CPU Thread bounds (`=3`). |
 
 ---
 
@@ -71,7 +71,7 @@ services:
       - --served-model-name=LFM2.5-1.2B-Instruct
       - --host=0.0.0.0
       - --port=8000
-      - --max-model-len=8192
+      - --max-model-len=32768
       - --max-num-seqs=80
       - --swap-space=1
       - --gpu-memory-utilization=0.95
